@@ -1,0 +1,45 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '16.15.1'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
+
+- task: Bash@3
+  displayName: 'Yarn version before update'
+  inputs:
+      targetType: inline
+      script: |
+        echo "Yarn version before update:"
+        yarn --version
+  
+- task: Bash@3
+  displayName: 'Update Yarn version to 2.x'
+  inputs:
+      targetType: inline
+      script: |
+        yarn set version berry
+        yarn set version 2.x
+
+- task: Bash@3
+  displayName: 'Yarn version after update'
+  inputs:
+      targetType: inline
+      script: |
+        echo "Yarn version after update:"
+        yarn --version
