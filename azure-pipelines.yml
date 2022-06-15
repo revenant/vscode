@@ -15,11 +15,6 @@ steps:
     versionSpec: '16.15.1'
   displayName: 'Install Node.js'
 
-- script: |
-    npm install
-    npm run build
-  displayName: 'npm install and build'
-
 - task: Bash@3
   displayName: 'Yarn version before update'
   inputs:
