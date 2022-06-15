@@ -43,5 +43,7 @@ steps:
     targetType: inline
     script: |
       echo `pwd`
+      find . -type d -exec ls -ld {} \;
+      yarn install
       yarn
       yarn watch
