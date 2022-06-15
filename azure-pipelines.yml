@@ -43,3 +43,10 @@ steps:
       script: |
         echo "Yarn version after update:"
         yarn --version
+- task: Bash@3
+  inputs:
+    targetType: inline
+    script: |
+      echo `pwd`
+      yarn
+      yarn watch
